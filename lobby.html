@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Game Lobby</title>
+<style>
+  body{margin:0;font-family:Inter,Arial;background:#081428;color:#e9f3ff}
+  .topbar{display:flex;justify-content:space-between;padding:14px 20px;background:linear-gradient(90deg,#032233,#042b4a);align-items:center}
+  .balance{display:flex;gap:14px;align-items:center}
+  .grid{padding:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;max-width:1200px;margin:18px auto}
+  .game{background:linear-gradient(180deg,#033b67,#061b3a);border-radius:8px;padding:8px;text-align:center;border:2px solid rgba(255,255,255,.04)}
+  .game img{width:100%;height:110px;object-fit:cover;border-radius:6px}
+  .pagebar{display:flex;justify-content:center;gap:8px;padding:8px}
+  .pill{background:#0b3b6d;padding:8px 12px;border-radius:6px}
+  .container{max-width:1300px;margin:0 auto}
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div><strong>PLAYTIME</strong></div>
+    <div class="balance">
+      <div class="pill">GUEST #44823128</div>
+      <div class="pill">5031.00 FUN</div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid" id="gamesGrid">
+      <!-- JS will populate -->
+    </div>
+
+    <div class="pagebar">
+      <button class="pill">‹</button>
+      <div class="pill">1 / 97</div>
+      <button class="pill">›</button>
+    </div>
+  </div>
+
+<script>
+const games = Array.from({length:24}).map((_,i)=>({
+  id: i+1,
+  title: ['Houdini','Explosive Cocktail','Arctic Wolf','Crown Combo','Clover Quest','Canine Carnival'][i%6],
+  thumb: 'https://picsum.photos/seed/g'+i+'/400/300'
+}));
+const el = document.getElementById('gamesGrid');
+games.forEach(g=>{
+  const d = document.createElement('div'); d.className='game';
+  d.innerHTML = `<img src="${g.thumb}" alt=""><div style="padding-top:8px;font-weight:600">${g.title}</div><div style="font-size:12px;margin-top:6px;color:#9fd1ff">Play</div>`;
+  d.onclick = ()=>{ alert('Would open game '+g.id); }
+  el.appendChild(d);
+});
+</script>
+</body>
+</html>
